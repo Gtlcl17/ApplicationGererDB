@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 07 oct. 2018 à 19:03
+-- Généré le :  Dim 07 oct. 2018 à 20:03
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -35,16 +35,20 @@ CREATE TABLE IF NOT EXISTS `identifiants` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(32) NOT NULL,
   `mdp` varchar(32) NOT NULL,
-  PRIMARY KEY (`id`)
+  `ref_utilisateur` int(11) NOT NULL,
+  `ref_role` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ref_utilisateur` (`ref_utilisateur`),
+  KEY `ref_role` (`ref_role`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `identifiants`
 --
 
-INSERT INTO `identifiants` (`id`, `login`, `mdp`) VALUES
-(1, 'Gtlcl17', 'virer45'),
-(2, 'Tovae6w11', 'philip12');
+INSERT INTO `identifiants` (`id`, `login`, `mdp`, `ref_utilisateur`, `ref_role`) VALUES
+(1, 'Gtlcl17', 'virer45', 1, 1),
+(2, 'Tovae6w11', 'philip12', 3, 3);
 
 -- --------------------------------------------------------
 
@@ -78,64 +82,30 @@ INSERT INTO `roles` (`id`, `nom`, `description`) VALUES
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ref_identifiant` int(11) NOT NULL,
   `nom` varchar(32) NOT NULL,
   `prénom` varchar(32) NOT NULL,
+  `email` varchar(64) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
-  UNIQUE KEY `nom_2` (`nom`,`prénom`),
-  KEY `ref_id` (`ref_identifiant`)
+  UNIQUE KEY `nom_2` (`nom`,`prénom`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`id`, `ref_identifiant`, `nom`, `prénom`) VALUES
-(1, 1, 'Toller', 'Guillaume'),
-(3, 2, 'Vervaet', 'Tommy');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `utilisateur_role`
---
-
-DROP TABLE IF EXISTS `utilisateur_role`;
-CREATE TABLE IF NOT EXISTS `utilisateur_role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ref_utilisateur` int(11) NOT NULL,
-  `ref_role` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `ref_identifiant` (`ref_utilisateur`),
-  KEY `ref_role` (`ref_role`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `utilisateur_role`
---
-
-INSERT INTO `utilisateur_role` (`id`, `ref_utilisateur`, `ref_role`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 3),
-(4, 3, 2),
-(5, 3, 3);
+INSERT INTO `utilisateur` (`id`, `nom`, `prénom`, `email`) VALUES
+(1, 'Toller', 'Guillaume', 'tollerguillaume@hotmail.com'),
+(3, 'Vervaet', 'Tommy', 'vervaettommy@hotmail.com');
 
 --
 -- Contraintes pour les tables déchargées
 --
 
 --
--- Contraintes pour la table `utilisateur`
+-- Contraintes pour la table `identifiants`
 --
-ALTER TABLE `utilisateur`
-  ADD CONSTRAINT `identifiant_ref_identifiant` FOREIGN KEY (`ref_identifiant`) REFERENCES `identifiants` (`id`);
-
---
--- Contraintes pour la table `utilisateur_role`
---
-ALTER TABLE `utilisateur_role`
+ALTER TABLE `identifiants`
   ADD CONSTRAINT `role_refrole` FOREIGN KEY (`ref_role`) REFERENCES `roles` (`id`),
   ADD CONSTRAINT `utilisateur_refutilisateur` FOREIGN KEY (`ref_utilisateur`) REFERENCES `utilisateur` (`id`);
 COMMIT;

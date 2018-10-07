@@ -12,6 +12,7 @@ namespace ApplicationGererDB
 	/// </summary>
 	class GMBD
 	{
+		private static readonly MyDB.CodeSql c_NomTable_Utilisateur = new MyDB.CodeSql(new Utilisateur().NomDeLaTablePrincipale);
 		// <summary>
 		/// Référence l'objet de connexion au serveur de base de données MySql
 		/// </summary>
@@ -52,6 +53,19 @@ namespace ApplicationGererDB
 		public bool Initialiser()
 		{
 			return m_BD.SeConnecter();
+		}
+
+		public Utilisateur ObtenirUtilisateur(int Id)
+		{
+			return EnumererUtilisateurs(new MyDB.CodeSql("WHERE id = {0}", Id), null).FirstOrDefault();
+		}
+
+		public IEnumerable<Utilisateur> EnumererUtilisateurs(MyDB.CodeSql ClauseWhere, MyDB.CodeSql ClauseOrderBy)
+		{
+			if (ClauseWhere == null) ClauseWhere = MyDB.CodeSql.Vide;
+			if (ClauseOrderBy == null) ClauseOrderBy = MyDB.CodeSql.Vide;
+			return Utilisateur.Enumerer(m_BD, m_BD.Enumerer("SELECT * FROM {0} {1} {2}", c_NomTable_Utilisateur, ClauseWhere, ClauseOrderBy));
+
 		}
 	}
 }

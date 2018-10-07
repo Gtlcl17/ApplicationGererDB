@@ -46,7 +46,10 @@ namespace ApplicationGererDB
 
 			#region tests
 			// Boucle affichant chaque utilisateur présent dans la db avec son nom, prénom et son ou ses rôles
-
+			foreach (Utilisateur Utilisateur in s_GMBD.EnumererUtilisateurs(null, new MyDB.CodeSql("ORDER BY nom ASC")))
+			{
+				System.Diagnostics.Debug.WriteLine(string.Format("* {0} - {1} - {2}", Utilisateur.Id, Utilisateur.Nom, Utilisateur.Email));
+			}
 			#endregion
 
 
