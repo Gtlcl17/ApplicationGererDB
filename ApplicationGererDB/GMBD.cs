@@ -45,5 +45,13 @@ namespace ApplicationGererDB
 					MessageErreur));
 			};
 		}
+		/// <summary>
+		/// Permet d'initialiser ce gestionnaire de modèles
+		/// </summary>
+		/// <returns></returns>
+		public bool Initialiser()
+		{
+			return m_BD.SeConnecter();
+		}
 	}
 }
