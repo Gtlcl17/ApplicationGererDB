@@ -13,10 +13,11 @@ namespace ApplicationGererDB
 	class GMBD
 	{
 		private static readonly MyDB.CodeSql c_NomTable_Utilisateur = new MyDB.CodeSql(new Utilisateur().NomDeLaTablePrincipale);
-		// <summary>
-		/// Référence l'objet de connexion au serveur de base de données MySql
-		/// </summary>
-		private MyDB m_BD;
+        private static readonly MyDB.CodeSql c_NomTable_Faction = new MyDB.CodeSql(new Faction().NomDeLaTablePrincipale);
+        // <summary>
+        /// Référence l'objet de connexion au serveur de base de données MySql
+        /// </summary>
+        private MyDB m_BD;
 
 		/// <summary>
 		/// Référence de l'objet de connexion au serveur MySQL
@@ -67,5 +68,13 @@ namespace ApplicationGererDB
 			return Utilisateur.Enumerer(m_BD, m_BD.Enumerer("SELECT * FROM {0} {1} {2}", c_NomTable_Utilisateur, ClauseWhere, ClauseOrderBy));
 
 		}
-	}
+
+        public IEnumerable<Faction> EnumererFactions(MyDB.CodeSql ClauseWhere, MyDB.CodeSql ClauseOrderBy)
+        {
+            if (ClauseWhere == null) ClauseWhere = MyDB.CodeSql.Vide;
+            if (ClauseOrderBy == null) ClauseOrderBy = MyDB.CodeSql.Vide;
+            return Faction.Enumerer(m_BD, m_BD.Enumerer("SELECT * FROM {0} {1} {2}", c_NomTable_Faction, ClauseWhere, ClauseOrderBy));
+
+        }
+    }
 }

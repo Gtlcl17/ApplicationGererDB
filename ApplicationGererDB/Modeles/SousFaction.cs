@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace ApplicationGererDB
 {
-	public class Faction : Entite<Faction, Faction.Champ>
+	public class SousFaction : Entite<SousFaction, SousFaction.Champ>
 	{
 		/// <summary>
-		/// Champ décrivant cette faction
+		/// Champ décrivant cette SousFaction
 		/// </summary>
 		public enum Champ
 		{
 			/// <summary>
-			/// Identifiant de cette Faction
+			/// Identifiant de cette SousFaction
 			/// </summary>
 			Id,
 			/// <summary>
-			/// name de ce Faction
+			/// name de ce SousFaction
 			/// </summary>
 			Name
 		}
@@ -29,16 +29,11 @@ namespace ApplicationGererDB
         /// </summary>
         private string m_Name;
 
-        /// <summary>
-        /// Stocke les sous-factions liées à cette Faction
-        /// </summary>
-        private IEnumerable<SousFaction> m_SousFactions;
-
         #endregion
 
         #region Membres publics
         /// <summary>
-        /// Name de ce Faction
+        /// Name de ce SousFaction
         /// </summary>
         public string Name
         {
@@ -63,20 +58,14 @@ namespace ApplicationGererDB
 			}
 		}
 
-		public IEnumerable<SousFaction> SousFactions
-        {
-            get
-            {
-                return EnumererSousFactions();
-            }
-        }
+		
 		#endregion
 
 		#region Constructeur
 		/// <summary>
 		/// Constructeur par défaut
 		/// </summary>
-		public Faction()
+		public SousFaction()
             : base()
         {
 			m_Name = string.Empty;
@@ -85,9 +74,9 @@ namespace ApplicationGererDB
 		/// <summary>
 		/// Constructeur spécifique
 		/// </summary>
-		/// <param name="Id">Identifiant de ce Faction</param>
-		/// <param name="Name">Nom de ce Faction</param>
-		public Faction(int Id, string Name)
+		/// <param name="Id">Identifiant de ce SousFaction</param>
+		/// <param name="Name">Nom de ce SousFaction</param>
+		public SousFaction(int Id, string Name)
             : this()
         {
 			DefinirId(Id);
@@ -99,7 +88,7 @@ namespace ApplicationGererDB
 		/// </summary>
 		/// <param name="Connexion">Connexion au serveur MySQL</param>
 		/// <param name="Enregistrement">Enregistrement d'où extraire les valeurs de champs</param>
-		public Faction(PDSGBD.MyDB Connexion, PDSGBD.MyDB.IEnregistrement Enregistrement)
+		public SousFaction(PDSGBD.MyDB Connexion, PDSGBD.MyDB.IEnregistrement Enregistrement)
             : this()
         {
 			base.Connexion = Connexion;
@@ -118,9 +107,9 @@ namespace ApplicationGererDB
 		/// <param name="Connexion">Connexion au serveur MySQL</param>
 		/// <param name="Enregistrements">Enregistrements énumérés, sources des entités à créer</param>
 		/// <returns>Enumération des entités issues des enregistrements énumérés</returns>
-		public static IEnumerable<Faction> Enumerer(PDSGBD.MyDB Connexion, IEnumerable<PDSGBD.MyDB.IEnregistrement> Enregistrements)
+		public static IEnumerable<SousFaction> Enumerer(PDSGBD.MyDB Connexion, IEnumerable<PDSGBD.MyDB.IEnregistrement> Enregistrements)
 		{
-			return Enumerer(Enregistrements, Enregistrement => new Faction(Connexion, Enregistrement));
+			return Enumerer(Enregistrements, Enregistrement => new SousFaction(Connexion, Enregistrement));
 		}
 
 		
@@ -133,7 +122,7 @@ namespace ApplicationGererDB
 		{
 			get
 			{
-				return "faction";
+				return "sousfaction";
 			}
 		}
 
@@ -144,22 +133,11 @@ namespace ApplicationGererDB
 		{
 			get
 			{
-				return new PDSGBD.MyDB.CodeSql("fa_name = {0}", m_Name);
+				return new PDSGBD.MyDB.CodeSql("sf_name = {0}", m_Name);
 			}
 		}
+		
+		#endregion
 
-        private IEnumerable<SousFaction> EnumererSousFactions()
-        {
-            if (base.Connexion == null) return new SousFaction[0];
-            return SousFaction.Enumerer(Connexion, Connexion.Enumerer(
-                @"SELECT fa_id, fa_name, sf_id, sf_name,
-                    FROM faction
-                    INNER JOIN subfaction ON faction.fa_id = subfaction.sf_fk_faction_id
-                    WHERE (fa_id = {0})",
-                Id));
-        }
-
-        #endregion
-
-    }
+	}
 }
