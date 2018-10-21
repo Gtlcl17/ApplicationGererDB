@@ -54,6 +54,10 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GMBD.cs" />
+    <Compile Include="Modeles\Character.cs" />
+    <Compile Include="Modeles\Faction.cs" />
+    <Compile Include="Modeles\Stuff.cs" />
+    <Compile Include="Modeles\Stat.cs" />
     <Compile Include="Outils\AccumulateurErreur.cs" />
     <Compile Include="Outils\ElementEnQuantite.cs" />
     <Compile Include="Outils\IU.Listes.cs" />

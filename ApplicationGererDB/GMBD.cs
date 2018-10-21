@@ -34,7 +34,7 @@ namespace ApplicationGererDB
 		/// </summary>
 		public GMBD()
 		{
-			m_BD = new MyDB("GestUtil_user", "Osj3MukXV1aaXYGc", "GestUtil");
+			m_BD = new MyDB("pmaroot", "y1vAb2NtVuX2XXQv", "warhammergt");
 			m_BD.SurErreur += (ConnexionEmettrice, MethodeEmettrice, RequeteSql, Valeurs, MessageErreur) =>
 			{
 				System.Diagnostics.Debug.WriteLine(string.Format("\nERREUR SQL :\nMéthode : {0}\nRequête initiale : {1}\nValeurs des {2} parties variables : {3}\nRequête exécutée : {4}\nMessage d'erreur : {5}\n",
