@@ -52,6 +52,7 @@ namespace ApplicationGererDB
 				{
 					Declencher_SurErreur(this, Champ.Name, "Nom vide ou ne contient que des espaces");
 				}
+                // TODO: Vérifier Nombre de caractères
 				else
 				{
 					value = value.Trim();
@@ -152,10 +153,9 @@ namespace ApplicationGererDB
         {
             if (base.Connexion == null) return new SousFaction[0];
             return SousFaction.Enumerer(Connexion, Connexion.Enumerer(
-                @"SELECT fa_id, fa_name, sf_id, sf_name,
-                    FROM faction
-                    INNER JOIN subfaction ON faction.fa_id = subfaction.sf_fk_faction_id
-                    WHERE (fa_id = {0})",
+                @"SELECT sf_id, sf_name,
+                    FROM subfaction
+                    WHERE (fa_id = {0}",
                 Id));
         }
 

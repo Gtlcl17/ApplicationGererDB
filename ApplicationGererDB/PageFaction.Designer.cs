@@ -32,6 +32,7 @@ namespace ApplicationGererDB
         {
             this.listeDeroulanteFaction1 = new ApplicationGererDB.ListeDeroulanteFaction();
             this.label1 = new System.Windows.Forms.Label();
+            this.ListeSubFaction = new ApplicationGererDB.ListeDeroulanteFaction();
             this.SuspendLayout();
             // 
             // listeDeroulanteFaction1
@@ -50,14 +51,22 @@ namespace ApplicationGererDB
             this.label1.TabIndex = 1;
             this.label1.Text = "Liste des factions:";
             // 
+            // ListeSubFaction
+            // 
+            this.ListeSubFaction.Location = new System.Drawing.Point(3, 77);
+            this.ListeSubFaction.Name = "ListeSubFaction";
+            this.ListeSubFaction.Size = new System.Drawing.Size(362, 36);
+            this.ListeSubFaction.TabIndex = 2;
+            // 
             // PageFaction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.ListeSubFaction);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listeDeroulanteFaction1);
             this.Name = "PageFaction";
-            this.Size = new System.Drawing.Size(384, 170);
+            this.Size = new System.Drawing.Size(373, 367);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -67,5 +76,6 @@ namespace ApplicationGererDB
 
         private ListeDeroulanteFaction listeDeroulanteFaction1;
         private System.Windows.Forms.Label label1;
+        private ListeDeroulanteFaction ListeSubFaction;
     }
 }

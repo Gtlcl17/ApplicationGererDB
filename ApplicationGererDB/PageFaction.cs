@@ -19,7 +19,9 @@ namespace ApplicationGererDB
         {
             InitializeComponent();
             listeDeroulanteFaction1.Factions = Program.GMBD.EnumererFactions(null, c_ClauseOrderBy_Nom);
-            
+            // Selected index changed
+
+            // 
         }
     }
 }
