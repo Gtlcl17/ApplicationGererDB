@@ -51,7 +51,7 @@ namespace ApplicationGererDB
             }
 
             /// <summary>
-            /// Méthode retournant le texte qui sera représentatif dans la ComboBox de la zône considérée
+            /// Méthode retournant le texte qui sera représentatif dans la ComboBox de la faction
             /// </summary>
             /// <returns>Chaîne représentant cet élément</returns>
             public override string ToString()
@@ -82,10 +82,56 @@ namespace ApplicationGererDB
             }
         }
 
+        /// <summary>
+        /// Faction sélectionnée
+        /// </summary>
+        public Faction FactionSelectionnee
+        {
+            get
+            {
+                return (comboFaction.SelectedItem is Element) ? (comboFaction.SelectedItem as Element).Faction : null;
+            }
+            set
+            {
+                comboFaction.SelectedItem = (value != null) ? new Element(value) : null;
+            }
+        }
+      
+        /// <summary>
+        /// Evénement déclenché quand il y a un changement de sélection de faction
+        /// </summary>
+        public event EventHandler SurChangementSelection = null;
+
+
         public ListeDeroulanteFaction()
         {
             InitializeComponent();
+            this.SizeChanged += ListeDeroulanteFaction_SizeChanged;
+            comboFaction.SelectedIndexChanged += ComboFaction_SelectedIndexChanged;
 
+        }
+
+        /// <summary>
+        /// En cas de changement de sélection dans la ComboBox
+        /// </summary>
+        /// <param name="sender">Emetteur de l'événement</param>
+        /// <param name="e">Description de l'événement</param>
+        private void ComboFaction_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (SurChangementSelection != null)
+            {
+                SurChangementSelection(this, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
+        /// En cas de changement de taille du contrôle
+        /// </summary>
+        /// <param name="sender">Emetteur de l'événement</param>
+        /// <param name="e">Description de l'événement</param>
+        private void ListeDeroulanteFaction_SizeChanged(object sender, EventArgs e)
+        {
+            this.Size = new Size(this.Size.Width, comboFaction.Height);
         }
     }
 }

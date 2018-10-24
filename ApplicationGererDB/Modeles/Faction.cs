@@ -32,7 +32,7 @@ namespace ApplicationGererDB
         /// <summary>
         /// Stocke les sous-factions liées à cette Faction
         /// </summary>
-        private IEnumerable<SousFaction> m_SousFactions;
+        private List<SousFaction> m_SousFactions;
 
         #endregion
 
@@ -53,6 +53,10 @@ namespace ApplicationGererDB
 					Declencher_SurErreur(this, Champ.Name, "Nom vide ou ne contient que des espaces");
 				}
                 // TODO: Vérifier Nombre de caractères
+                else if(value.Trim().Length >20)
+                {
+                    Declencher_SurErreur(this, Champ.Name, "Ce champ peut contenir au maximum 20 caractères");
+                }
 				else
 				{
 					value = value.Trim();
@@ -81,6 +85,7 @@ namespace ApplicationGererDB
             : base()
         {
 			m_Name = string.Empty;
+            m_SousFactions = new List<SousFaction>();
 		}
 
 		/// <summary>

@@ -30,17 +30,9 @@ namespace ApplicationGererDB
         /// </summary>
         private void InitializeComponent()
         {
-            this.listeDeroulanteFaction1 = new ApplicationGererDB.ListeDeroulanteFaction();
             this.label1 = new System.Windows.Forms.Label();
-            this.ListeSubFaction = new ApplicationGererDB.ListeDeroulanteFaction();
+            this.listeDeroulanteFaction2 = new ApplicationGererDB.ListeDeroulanteFaction();
             this.SuspendLayout();
-            // 
-            // listeDeroulanteFaction1
-            // 
-            this.listeDeroulanteFaction1.Location = new System.Drawing.Point(0, 35);
-            this.listeDeroulanteFaction1.Name = "listeDeroulanteFaction1";
-            this.listeDeroulanteFaction1.Size = new System.Drawing.Size(362, 36);
-            this.listeDeroulanteFaction1.TabIndex = 0;
             // 
             // label1
             // 
@@ -51,24 +43,22 @@ namespace ApplicationGererDB
             this.label1.TabIndex = 1;
             this.label1.Text = "Liste des factions:";
             // 
-            // ListeSubFaction
+            // listeDeroulanteFaction2
             // 
-            this.ListeSubFaction.Location = new System.Drawing.Point(3, 77);
-            this.ListeSubFaction.Name = "ListeSubFaction";
-            this.ListeSubFaction.Size = new System.Drawing.Size(362, 36);
-            this.ListeSubFaction.TabIndex = 2;
+            this.listeDeroulanteFaction2.FactionSelectionnee = null;
+            this.listeDeroulanteFaction2.Location = new System.Drawing.Point(3, 36);
+            this.listeDeroulanteFaction2.Name = "listeDeroulanteFaction2";
+            this.listeDeroulanteFaction2.Size = new System.Drawing.Size(362, 36);
+            this.listeDeroulanteFaction2.TabIndex = 0;
             // 
             // PageFaction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.ListeSubFaction);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.listeDeroulanteFaction1);
+            this.Controls.Add(this.listeDeroulanteFaction2);
             this.Name = "PageFaction";
             this.Size = new System.Drawing.Size(373, 367);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -76,6 +66,6 @@ namespace ApplicationGererDB
 
         private ListeDeroulanteFaction listeDeroulanteFaction1;
         private System.Windows.Forms.Label label1;
-        private ListeDeroulanteFaction ListeSubFaction;
+        
     }
 }

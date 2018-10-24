@@ -20,8 +20,29 @@ namespace ApplicationGererDB
             InitializeComponent();
             listeDeroulanteFaction1.Factions = Program.GMBD.EnumererFactions(null, c_ClauseOrderBy_Nom);
             // Selected index changed
-
+            //listeDeroulanteFaction1.SurChangementSelection += new System.EventHandler(this.listeDeroulanteFaction_SurChangementSelection);
+            //listeDeroulanteFaction1.SurChangementSelection += new System.EventHandler(this.lis)
             // 
         }
+/*
+        private void listeDeroulanteFaction_SurChangementSelection(object sender, EventArgs e)
+        {
+            if (listeDeroulanteFaction1.FactionSelectionnee != null)
+            {
+                Liste listeDeroulanteFaction1.FactionSelectionnee.SousFactions;
+                ;
+            }
+            else
+            {
+                listAppareilsZones.AppareilPresents = null;
+            }
+        }
+
+        private void listeDeroulanteSousFaction_SurChangementSelection(object sender, EventArgs e)
+        {
+            ListeSubFaction = listTypesAppareils.AppareilSelectionne;
+            buttonModifierAppareil.Enabled = (listTypesAppareils.AppareilSelectionne != null);
+        }
+        */
     }
 }
